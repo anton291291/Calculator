@@ -90,7 +90,6 @@ class Buttons extends React.Component {
 }
 
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -99,43 +98,85 @@ class App extends Component {
       number2: []
     }
     this.handleClick = this.handleClick.bind(this)
-  
+
   }
 
     handleClick(e) {
-      if (this.state.number2.length == 0 && this.state.number == 0 && (e.target.value !== "0" && e.target.value !== "-" && e.target.value !== "+" &&
-      e.target.value !== "/" && e.target.value !== "*" && e.target.value !== "="
-      && e.target.value !== "."
-      && e.target.value !== "AC") )
+      if (this.state.number2.length == 0
+        && this.state.number == 0
+        && (e.target.value !== "0"
+          && e.target.value !== "-"
+          && e.target.value !== "+"
+          && e.target.value !== "/"
+          && e.target.value !== "*"
+          && e.target.value !== "="
+          && e.target.value !== "."
+          && e.target.value !== "AC")
+        )
        {
         this.setState({
           number: [e.target.value],
           number2: [e.target.value]
         });
-
       }
-      else if ((this.state.number2.length == 1 &&  (e.target.value !== 0 && e.target.value !== "-" && e.target.value !== "+" &&
-      e.target.value !== "/" && e.target.value !== "*" && e.target.value !== "="
-      && e.target.value !== "."
-      && e.target.value !== "AC")))
+
+      else if ((this.state.number2.length == 1
+        &&  (e.target.value !== 0
+          && e.target.value !== "-"
+          && e.target.value !== "+"
+          && e.target.value !== "/"
+          && e.target.value !== "*"
+          && e.target.value !== "="
+          && e.target.value !== "."
+          && e.target.value !== "AC")
+        ))
        {
         this.setState({
           number: this.state.number.concat(e.target.value),
           number2: this.state.number2.concat(e.target.value)
         });
       }
-      else if (this.state.number2.length >= 1 && (e.target.value == "-" || e.target.value == "+" ||
-      e.target.value == "/" || e.target.value == "*")) {
+      else if (this.state.number2.length >= 1
+        && (e.target.value == "-"
+          || e.target.value == "+"
+          || e.target.value == "/"
+          || e.target.value == "*")
+          && (this.state.number2[this.state.number2.length -1] !== e.target.value)
+        )
+        {
         this.setState({
           number: [e.target.value] ,
           number2: this.state.number2.concat(e.target.value)
         });
       }
+      else if (this.state.number2.length == 0
+        && e.target.value == ".")
+      {
+      this.setState({
+        number: this.state.number.concat(e.target.value),
+        number2: this.state.number.concat(e.target.value)
+      });
+      }
+      else if (this.state.number2.length >= 1 && e.target.value == "."
+        && !this.state.number.includes(".")
+        ) {
+        this.setState({
+          number: this.state.number.concat(e.target.value),
+          number2: this.state.number2.concat(e.target.value)
+        });
+
+      }
       else if
-        (this.state.number2.length > 1 && (e.target.value !== "-" && e.target.value !== "+" &&
-        e.target.value !== "/" && e.target.value !== "*" && e.target.value !== "="
-        && e.target.value !== "."
-        && e.target.value !== "AC"))
+        (this.state.number2.length > 1
+          && (e.target.value !== "-"
+            && e.target.value !== "+"
+            && e.target.value !== "/"
+            && e.target.value !== "*"
+            && e.target.value !== "="
+            && e.target.value !== "."
+            && e.target.value !== "AC"
+          )
+        )
         {
         this.setState({
           number: this.state.number.concat(e.target.value),
@@ -148,7 +189,8 @@ class App extends Component {
           number2: []
         });
       }
-      else if (this.state.number.length > 1 && e.target.value == "=") {
+      else if (this.state.number.length > 1 && e.target.value == "=")
+       {
         const equal = eval(this.state.number2.join(""))
         this.setState({
           number: equal,
