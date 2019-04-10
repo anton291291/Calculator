@@ -120,6 +120,29 @@ class App extends Component {
         });
       }
 
+      //Order is very important
+
+      else if ((this.state.number2.includes("=") && (e.target.value == "+"
+        || e.target.value == "-"
+        || e.target.value == "/"
+        || e.target.value == "*")))
+       {
+         console.log("penis")
+       this.setState({
+          number2: this.state.number.concat(e.target.value),
+          number: [e.target.value]
+        });
+      }
+
+      else if (this.state.number2.includes("="))
+       {
+         console.log("vagina")
+        this.setState({
+          number2: [e.target.value],
+          number: [e.target.value]
+        });
+      }
+
       else if ((this.state.number2.length == 1
         &&  (e.target.value !== 0
           && e.target.value !== "-"
@@ -193,8 +216,8 @@ class App extends Component {
        {
         const equal = eval(this.state.number2.join(""))
         this.setState({
-          number: equal,
-          number2: equal
+          number: equal.toString().split(""),
+          number2: this.state.number2.concat("=",equal.toString().split(""))
         });
       }
     }
