@@ -120,6 +120,34 @@ class App extends Component {
         });
       }
 
+      else if (this.state.number2 == 0 && e.target.value == "0") {
+        this.setState({
+          number: this.state.number,
+          number2: this.state.number2
+        });
+      }
+      else if (this.state.number[1] == 0 &&
+        (e.target.value !== "-"
+          && e.target.value !== "+"
+          && e.target.value !== "/"
+          && e.target.value !== "*"
+          && e.target.value !== "="
+          && e.target.value !== "."
+          && e.target.value !== "AC")
+        ) {
+        this.setState({
+          number: this.state.number,
+          number2: this.state.number2
+        });
+      }
+
+      else if (e.target.value == "AC") {
+        this.setState({
+          number: [0],
+          number2: []
+        });
+      }
+
       //Order is very important
 
       else if ((this.state.number2.includes("=") && (e.target.value == "+"
@@ -127,16 +155,32 @@ class App extends Component {
         || e.target.value == "/"
         || e.target.value == "*")))
        {
-         console.log("penis")
        this.setState({
           number2: this.state.number.concat(e.target.value),
           number: [e.target.value]
         });
       }
 
+      else if (this.state.number2.includes("=")
+        && e.target.value == "=") {
+        this.setState({
+          number: this.state.number,
+          number2: this.state.number2
+        });
+      }
+
+      else if (this.state.number2.length > 1 && e.target.value == "."
+        && this.state.number2.includes("=")
+        )
+        {
+        this.setState({
+          number: [0,"."],
+          number2: [0,"."]
+        });
+
+      }
       else if (this.state.number2.includes("="))
        {
-         console.log("vagina")
         this.setState({
           number2: [e.target.value],
           number: [e.target.value]
@@ -180,6 +224,7 @@ class App extends Component {
         number2: this.state.number.concat(e.target.value)
       });
       }
+
       else if (this.state.number2.length >= 1 && e.target.value == "."
         && !this.state.number.includes(".")
         ) {
@@ -187,8 +232,8 @@ class App extends Component {
           number: this.state.number.concat(e.target.value),
           number2: this.state.number2.concat(e.target.value)
         });
-
       }
+
       else if
         (this.state.number2.length > 1
           && (e.target.value !== "-"
@@ -206,12 +251,7 @@ class App extends Component {
           number2: this.state.number2.concat(e.target.value)
         });
       }
-      else if (e.target.value == "AC") {
-        this.setState({
-          number: [0],
-          number2: []
-        });
-      }
+
       else if (this.state.number.length > 1 && e.target.value == "=")
        {
         const equal = eval(this.state.number2.join(""))
