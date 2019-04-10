@@ -102,6 +102,7 @@ class App extends Component {
   }
 
     handleClick(e) {
+
       if (this.state.number2.length == 0
         && this.state.number == 0
         && (e.target.value !== "0"
@@ -120,15 +121,25 @@ class App extends Component {
         });
       }
 
-      else if (this.state.number2 == 0 && e.target.value == "0") {
+      else if (this.state.number == 0 && e.target.value == "0") {
         this.setState({
           number: this.state.number,
           number2: this.state.number2
         });
       }
-      else if (this.state.number[1] == 0 &&
+
+      else if (this.state.number[1] == 0
+        && e.target.value == "0") {
+        this.setState({
+          number: this.state.number,
+          number2: this.state.number2
+        });
+      }
+
+      else if (this.state.number[1] == 0 && this.state.number.length < 3 &&
         (e.target.value !== "-"
           && e.target.value !== "+"
+          && e.target.value !== "0"
           && e.target.value !== "/"
           && e.target.value !== "*"
           && e.target.value !== "="
