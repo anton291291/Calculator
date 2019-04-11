@@ -127,7 +127,13 @@ class App extends Component {
           number2: this.state.number2
         });
       }
-
+      else if (this.state.number2.length < 3 && this.state.number[1] == "0"
+      && e.target.value !== "AC" && e.target.value !== "=") {
+        this.setState({
+          number: this.state.number.concat(e.target.value),
+          number2: this.state.number2.concat(e.target.value)
+        });
+      }
       else if (this.state.number[1] == 0
         && e.target.value == "0") {
         this.setState({
@@ -214,6 +220,7 @@ class App extends Component {
           number2: this.state.number2.concat(e.target.value)
         });
       }
+
       else if (this.state.number2.length >= 1
         && (e.target.value == "-"
           || e.target.value == "+"
@@ -271,8 +278,8 @@ class App extends Component {
           number2: this.state.number2.concat("=",equal.toString().split(""))
         });
       }
-    }
 
+    }
 
 
   render() {
