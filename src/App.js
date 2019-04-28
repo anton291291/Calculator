@@ -48,7 +48,7 @@ const button = [
     value: "+"
   },
   {
-    id: "substract",
+    id: "subtract",
     value: "-"
   },
   {
@@ -56,7 +56,7 @@ const button = [
     value: "*"
   },
   {
-    id: "devide",
+    id: "divide",
     value: "/"
   },
   {
